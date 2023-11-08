@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kalkulator prosty</title>
+    <script src="script1.js"></script>
+</head>
+<body>
+    <form id="kalkulator">
+        <label for="liczba1">Liczba 1:</label>
+        <input type="number" id="liczba1" name="liczba1"><br><br>
+        <label for="liczba2">Liczba 2:</label>
+        <input type="number" id="liczba2" name="liczba2"><br><br>
+        <label for="dzialanie">Co chcesz zrobić: </label>
+        <select id="dzialanie" name="dzialanie">
+            <option value="dodaj">Dodawanie</option>
+            <option value="odejmij">Odejmowanie</option>
+            <option value="pomnoz">Mnożenie</option>
+            <option value="podziel">Dzielenie</option>
+        </select><br><br>
+
+        <input type="button" value="Oblicz" onclick="kalkulator()">
+    </form>
+    <p>Wynik działania: <span id="wynik"></span></p>
+    </body>
+</html>
