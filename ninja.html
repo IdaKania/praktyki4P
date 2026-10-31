@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karta Postaci - Dark Fantasy</title>
+    <style>
+        :root {
+            --bg-body: #0a0a0c;
+            --card-bg: #141418;
+            --panel-bg: #1c1c22;
+            --border-color: #5c4932; /* Kolor postarzanego mosiądzu */
+            --border-glow: #8c714e;
+            --text-color: #e2dcd5;
+            --text-muted: #9e9588;
+            --accent-gold: #d4af37;
+            --accent-crimson: #9b2226;
+            --font-family: 'Georgia', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            font-family: var(--font-family);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        /* Układ A4 */
+        .page {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 210mm;
+            padding: 20mm 15mm;
+            border: 3px solid var(--border-color);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+
+        /* Ozdobne rogi (klimat RPG) */
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 6px; left: 6px; right: 6px; bottom: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            pointer-events: none;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            font-size: 1.9rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        /* 4 pola w jednej linii */
+        .header-info {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .info-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            background-color: var(--panel-bg);
+            border-radius: 4px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .info-box label {
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+            margin-bottom: 3px;
+        }
+
+        .info-box span {
+            font-size: 0.85rem;
+            word-break: break-word;
+            color: var(--text-color);
+        }
+
+        /* Ramka z opisem */
+        .description-box {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 4px;
+            background-color: var(--panel-bg);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .description-box label {
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .description-box p {
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+
+        /* Sekcja dwukolumnowa (Umiejętności + Ekwipunek) */
+        .main-content {
+            display: flex;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-gold);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+            margin-bottom: 2px;
+        }
+
+        /* Umiejętności po lewej */
+        .skill-item {
+            border: 1px solid var(--border-color);
+            padding: 9px 10px;
+            border-radius: 4px;
+            background-color: var(--panel-bg);
+            position: relative;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background-color: var(--accent-gold);
+            border-radius: 3px 0 0 3px;
+        }
+
+        .skill-header {
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+            color: var(--text-color);
+        }
+
+        .mana-cost {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* Ekwipunek po prawej */
+        .eq-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .eq-item {
+            border: 1px solid var(--border-color);
+            padding: 9px 10px;
+            border-radius: 4px;
+            font-size: 0.88rem;
+            background-color: var(--panel-bg);
+            color: var(--text-color);
+        }
+
+        /* Dolna sekcja: HP i Magia */
+        .footer-stats {
+            border-top: 2px solid var(--border-color);
+            padding-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .hp-box {
+            font-size: 1.05rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #2a1215 0%, var(--panel-bg) 100%);
+            padding: 10px 14px;
+            border: 1px solid var(--accent-crimson);
+            border-radius: 4px;
+            text-align: center;
+            color: #ffb3b3;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .magic-section {
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 4px;
+            background-color: var(--panel-bg);
+        }
+
+        .magic-title {
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .magic-list {
+            display: flex;
+            justify-content: space-around;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .magic-list span {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 10px;
+            border-radius: 3px;
+            border: 1px solid rgba(92, 73, 50, 0.5);
+        }
+
+        /* Responsywność dla ekranu telefonu */
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 0;
+            }
+            .page {
+                padding: 12px;
+                border: none;
+                box-shadow: none;
+            }
+            .header-info {
+                flex-direction: column;
+            }
+            .main-content {
+                flex-direction: column;
+            }
+        }
+
+        /* Styl do druku A4 */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                background: #141418;
+                padding: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .page {
+                border: none;
+                box-shadow: none;
+                width: 210mm;
+                height: 297mm;
+                padding: 15mm;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <h1>Karta Postaci</h1>
+
+        <!-- 4 pola w jednej linii -->
+        <div class="header-info">
+            <div class="info-box">
+                <label>Imię postaci</label>
+                <span>splinter - ninja</span>
+            </div>
+            <div class="info-box">
+                <label>Wiek</label>
+                <span>240 cykli księżyca (20lat)</span>
+            </div>
+            <div class="info-box">
+                <label>Uniwersum</label>
+                <span>Archipelag Cieni</span>
+            </div>
+            <div class="info-box">
+                <label>Rok uniwersum</label>
+                <span>14 rok Panowania Cichej Dynastii</span>
+            </div>
+        </div>
+
+        <!-- Ramka z opisem -->
+        <div class="description-box">
+            <label>Opis postaci i charakter</label>
+            <p>Wygnany z domu jako piętnastolatek, trafił w ręce syndykatu, który uczynił z niego bezwzględnego zabójcę. Dziś próbuje zerwać z krwawą przeszłością i iść własną drogą. Jest małomówny, niezwykle czujny i wciąż nawiedzany przez dwoistość dawnego fachu.</p>
+        </div>
+
+        <!-- Główna zawartość: po lewej umiejętności, po prawej ekwipunek -->
+        <div class="main-content">
+            <!-- Lewa strona: Umiejętności -->
+            <div class="column">
+                <div class="section-title">Umiejętności</div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">d12: Ognisty Taniec Ostrza (Silna)</div>
+                    <div class="mana-cost">Koszt many: 14</div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">d9: Atak z Cień (Zwykła)</div>
+                    <div class="mana-cost">Koszt many: 7</div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-header">d6: Szybkie Cięcie (Słaba)</div>
+                    <div class="mana-cost">Koszt many: 2</div>
+                </div>
+            </div>
+
+            <!-- Prawa strona: Ekwipunek -->
+            <div class="column">
+                <div class="section-title">Ekwipunek</div>
+                <ul class="eq-list">
+                    <li class="eq-item">1. Ostrze</li>
+                    <li class="eq-item">2. Zwieta lina z hakami</li>
+                    <li class="eq-item">3. Fiolka z listem</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pod wszystkim: HP i Magia -->
+        <div class="footer-stats">
+            <div class="hp-box">
+                ❤️ Maksymalne HP: 50 
+            </div>
+
+            <div class="magic-section">
+                <div class="magic-title">Szkoły Magii (INT 0–3)</div>
+                <div class="magic-list">
+                    <span>Czarna: <strong>0</strong></span>
+                    <span>Lasu: <strong>1</strong></span>
+                    <span>Ognia: <strong>2</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

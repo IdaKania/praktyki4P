@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spis Lokacji - Dark Fantasy</title>
+    <style>
+        :root {
+            --bg-body: #0a0a0c;
+            --card-bg: #141418;
+            --panel-bg: #1c1c22;
+            --border-color: #5c4932; /* Kolor postarzanego mosiądzu */
+            --border-glow: #8c714e;
+            --text-color: #e2dcd5;
+            --text-muted: #9e9588;
+            --accent-gold: #d4af37;
+            --accent-crimson: #9b2226;
+            --font-family: 'Georgia', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            font-family: var(--font-family);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            min-height: 100vh;
+        }
+
+        /* Układ A4 */
+        .page {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 210mm;
+            min-height: 297mm;
+            padding: 20mm 15mm;
+            border: 3px solid var(--border-color);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+
+        /* Ozdobne rogi (klimat RPG) */
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 6px; left: 6px; right: 6px; bottom: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            pointer-events: none;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            font-size: 1.9rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        /* Lista Lokacji */
+        .locations-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .location-card {
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 4px;
+            background-color: var(--panel-bg);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .location-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background-color: var(--accent-gold);
+            border-radius: 3px 0 0 3px;
+        }
+
+        .location-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .location-number {
+            background-color: var(--border-color);
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 0.8rem;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .location-title {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+        }
+
+        .location-description {
+            font-size: 0.88rem;
+            line-height: 1.45;
+            color: var(--text-muted);
+            font-style: italic;
+            padding-left: 4px;
+        }
+
+        /* Responsywność dla ekranu telefonu */
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 0;
+            }
+            .page {
+                padding: 12px;
+                border: none;
+                box-shadow: none;
+            }
+        }
+
+        /* Styl do druku A4 */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                background: #141418;
+                padding: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .page {
+                border: none;
+                box-shadow: none;
+                width: 210mm;
+                height: 297mm;
+                padding: 15mm;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <h1>Mapa Lokacji</h1>
+
+        <div class="locations-list">
+            <!-- Lokacja 1 -->
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-number">1</span>
+                    <span class="location-title">Zielony staw</span>
+                </div>
+                <div class="location-description">
+                    „Obszar stawu i jego bliskiej okolicy znane są z temperatur trudnych do zniesienia dla człowieka na dłuższy czas. Gorąc ten bardzo lubią jednak żaby, które tam zamieszkują i śpiewają od rana do nocy.”
+                </div>
+            </div>
+
+            <!-- Lokacja 2 -->
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-number">2</span>
+                    <span class="location-title">Obozowisko obok zielonego stawu</span>
+                </div>
+                <div class="location-description">
+                    „Wioska zamieszkała przez blisko 100 dziwnych niebieskich postaci. Każdy posiadający swoją historie. Każdy z określonymi ambicjami.”
+                </div>
+            </div>
+
+            <!-- Lokacja 3 -->
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-number">3</span>
+                    <span class="location-title">Kaplica luster widma</span>
+                </div>
+                <div class="location-description">
+                    „Przerażająca kaplica, w której nie wyrażasz swojej duchowości. Jedyne co widzisz to 16 różnych wersji siebie, która umiera w inny sposób. A to wszystko przez lustra, które otaczają cię z każdej strony.”
+                </div>
+            </div>
+
+            <!-- Lokacja 4 -->
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-number">4</span>
+                    <span class="location-title">Cmentarzysko skamieniałych</span>
+                </div>
+                <div class="location-description">
+                    „Za dnia spokój, w nocy koszmar. O 3:13 wszyscy zmarli powstają i do świtu szukają nowych ofiar. Mają 2 metry wysokości, martwy uśmiech i unosi się od nich ciężki odór. Nie warto im się przeciwstawić”
+                </div>
+            </div>
+
+            <!-- Lokacja 5 -->
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-number">5</span>
+                    <span class="location-title">Polana świetlików mutantów</span>
+                </div>
+                <div class="location-description">
+                    „Świetliki, które w nocy nie tylko oświecą ci drogę, ale również twoją duszę. Są znane z ugryzienia, które są objawowo podobne do zjedzenia dziwnych grzybków z pewnego mostu.”
+                </div>
+            </div>
+
+            <!-- Lokacja 6 -->
+            <div class="location-card">
+                <div class="location-header">
+                    <span class="location-number">6</span>
+                    <span class="location-title">Most błękitnych grzybów</span>
+                </div>
+                <div class="location-description">
+                    „Każdy przybysz choć raz tam zaszedł, ale nie każdy już wrócił. W nocy wszystkie się chowają, za dnia rosną i cieszą sławą”
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

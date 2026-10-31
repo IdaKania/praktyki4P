@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zasady Ogólne - Dark Fantasy</title>
+    <style>
+        :root {
+            --bg-body: #0a0a0c;
+            --card-bg: #141418;
+            --panel-bg: #1c1c22;
+            --border-color: #5c4932; /* Kolor postarzanego mosiądzu */
+            --border-glow: #8c714e;
+            --text-color: #e2dcd5;
+            --text-muted: #9e9588;
+            --accent-gold: #d4af37;
+            --accent-crimson: #9b2226;
+            --font-family: 'Georgia', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            font-family: var(--font-family);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            min-height: 100vh;
+        }
+
+        /* Układ A4 */
+        .page {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 210mm;
+            min-height: 297mm;
+            padding: 20mm 15mm;
+            border: 3px solid var(--border-color);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+
+        /* Ozdobne rogi (klimat RPG) */
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 6px; left: 6px; right: 6px; bottom: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            pointer-events: none;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            font-size: 1.9rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        /* Lista Zasad */
+        .rules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .rule-item {
+            border: 1px solid var(--border-color);
+            padding: 9px 12px;
+            border-radius: 4px;
+            background-color: var(--panel-bg);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+            position: relative;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .rule-item::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background-color: var(--accent-gold);
+            border-radius: 3px 0 0 3px;
+        }
+
+        .rule-number {
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 0.9rem;
+            min-width: 18px;
+        }
+
+        .rule-text {
+            font-size: 0.88rem;
+            line-height: 1.45;
+            color: var(--text-color);
+        }
+
+        /* Responsywność dla ekranu telefonu */
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 0;
+            }
+            .page {
+                padding: 12px;
+                border: none;
+                box-shadow: none;
+            }
+        }
+
+        /* Styl do druku A4 */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                background: #141418;
+                padding: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .page {
+                border: none;
+                box-shadow: none;
+                width: 210mm;
+                height: 297mm;
+                padding: 15mm;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <h1>Zasady Ogólne</h1>
+
+        <div class="rules-list">
+            <div class="rule-item">
+                <span class="rule-number">1.</span>
+                <span class="rule-text">Każdy z graczy ma spersonalizowaną kartę postaci. Podczas rozgrywki można używać itemów z ekwipunku, swoich mocy i ogólnie wykorzystywać informacje z karty postaci aby przebrnąć przez mapę.</span>
+            </div>
+
+            <div class="rule-item">
+                <span class="rule-number">2.</span>
+                <span class="rule-text">&lt;Opis kart postaci&gt;</span>
+            </div>
+
+            <div class="rule-item">
+                <span class="rule-number">3.</span>
+                <span class="rule-text">Nie można kłamać podczas rozgrywki, pełne wcielenie się w postać.</span>
+            </div>
+
+            <div class="rule-item">
+                <span class="rule-number">4.</span>
+                <span class="rule-text">Gracze rozmawiają ze sobą tylko jako swoja postać. Muszą szanować cudze zaimki.</span>
+            </div>
+
+            <div class="rule-item">
+                <span class="rule-number">5.</span>
+                <span class="rule-text">Gracze korzystają z kostek: D6, D9, D12 podczas atakowania, jak i D20, tylko podczas próby testu.</span>
+            </div>
+
+            <div class="rule-item">
+                <span class="rule-number">6.</span>
+                <span class="rule-text">Gracze dostają +5HP, po wyrzuceniu w każdym momencie rozgrywki numeru 20 na kostkę D20.</span>
+            </div>
+
+            <div class="rule-item">
+                <span class="rule-number">7.</span>
+                <span class="rule-text">Gracze dostają dodatkowe HP po każdej rozgrywce, zależnie od tego ile HP wylosują na kostce D8.</span>
+            </div>
+
+            <div class="rule-item">
+                <span class="rule-number">8.</span>
+                <span class="rule-text">Jeżeli gracz ma poniżej 12HP, to odpoczywa i nie uczestniczy w walkach, ale zasady dostawania dodatkowego HP dotyczą wszystkich graczy niezależnie od tego czy uczestniczą w walce.</span>
+            </div>
+
+            <div class="rule-item">
+                <span class="rule-number">9.</span>
+                <span class="rule-text">Rozmowa z NPC’tami może potoczyć się różnie. Możecie zadawać pytania na około, ale również wprost. Jednak nie zawsze od razu wam odpowiedzą na wasze pytania.</span>
+            </div>
+			<div class="rule-item">
+                <span class="rule-number">10.</span>
+                <span class="rule-text">Graczy obowiązuje kolejka zgodnie ze wskazówkami zegara, chyba że GM powiedzą inaczej.</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
